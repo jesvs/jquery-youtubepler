@@ -8,6 +8,8 @@
       video_id
 
     player_container = $(opts.player)
+    @width = opts.width or 640
+    @height = opts.height or 390
     @player = null
 
     # get video ids
@@ -31,8 +33,8 @@
     player_container.append $("<script src='https://www.youtube.com/iframe_api'>")
     window.onYouTubeIframeAPIReady = () =>
       @player = new YT.Player 'player',
-        height: 390
-        width: 640
+        height: @height
+        width: @width
         events:
           'onReady': onPlayerReady
     

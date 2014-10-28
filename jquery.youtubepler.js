@@ -11,6 +11,8 @@
       return video_id;
     };
     player_container = $(opts.player);
+    this.width = opts.width || 640;
+    this.height = opts.height || 390;
     this.player = null;
     video_ids = [];
     links = this.find('a');
@@ -37,8 +39,8 @@
     window.onYouTubeIframeAPIReady = (function(_this) {
       return function() {
         return _this.player = new YT.Player('player', {
-          height: 390,
-          width: 640,
+          height: _this.height,
+          width: _this.width,
           events: {
             'onReady': onPlayerReady
           }
