@@ -6,7 +6,12 @@ Create a YouTube player with a playlist from a list of links.
 
 Include script *after* the jQuery library:
 
+```html
+<script src="/path-to-your-js/jquery.youtubepler.js"></script>
 ```
+
+## HTML
+```html
 <div id="player"></div>
 <ul id="youtube_links">
   <li>
@@ -18,14 +23,13 @@ Include script *after* the jQuery library:
     </a>
   </li>
 </ul>
-<script src="/path-to-your-js/jquery.youtubepler.js"></script>
 ```
 
 ## Usage
 
 The *player* option is required.
 
-```
+```javascript
 $(document).ready(function() {
 
   $('#youtube_links').youtubepler({
@@ -42,7 +46,7 @@ The player's dimension can be configured:
 * width (default 640px)
 * height (default 390px)
 
-```
+```javascript
   $('#youtube_links').youtubepler({
     player: '#player',
     width: 640,
