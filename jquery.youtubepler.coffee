@@ -49,7 +49,6 @@
   if $("script[src='https://www.youtube.com/iframe_api']").length is 0
     $('script:first').before "<script src='https://www.youtube.com/iframe_api'>"
   window.onYouTubeIframeAPIReady = ->
-    console.log "Create the players now"
     for createPlayer in window.youtubeplerPlayers
       createPlayer()
 

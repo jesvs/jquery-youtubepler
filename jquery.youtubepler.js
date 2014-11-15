@@ -62,7 +62,6 @@
     }
     return window.onYouTubeIframeAPIReady = function() {
       var createPlayer, _i, _len, _ref, _results;
-      console.log("Create the players now");
       _ref = window.youtubeplerPlayers;
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
