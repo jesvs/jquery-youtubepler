@@ -1,4 +1,5 @@
 (($) ->
+  window.youtubeplerPlayers = []
   $.fn.youtubepler = (opts) ->
     parseYouTubeUrl = (url) ->
       video_id = url.split('v=')[1]
@@ -8,6 +9,7 @@
       video_id
 
     player_container = $(opts.player)
+    @player_id = opts.player.replace('#','')
     @width = opts.width or 640
     @height = opts.height or 390
     @player = null
@@ -29,17 +31,26 @@
         index = @player.getPlaylist().indexOf(parseYouTubeUrl(event.target.href))
         @player.playVideoAt index
 
-    # create player
-    player_container.append $("<script src='https://www.youtube.com/iframe_api'>")
-    window.onYouTubeIframeAPIReady = () =>
-      @player = new YT.Player 'player',
+    createPlayer = () =>
+      @player = new YT.Player @player_id,
         height: @height
         width: @width
         events:
           'onReady': onPlayerReady
-    
+
+    window.youtubeplerPlayers.push createPlayer
+
     onPlayerReady = (event) =>
       event.target.cuePlaylist video_ids
 
     return this
+
+  # insert iframe_api only if needed
+  if $("script[src='https://www.youtube.com/iframe_api']").length is 0
+    $('script:first').before "<script src='https://www.youtube.com/iframe_api'>"
+  window.onYouTubeIframeAPIReady = ->
+    console.log "Create the players now"
+    for createPlayer in window.youtubeplerPlayers
+      createPlayer()
+
 )(jQuery)
